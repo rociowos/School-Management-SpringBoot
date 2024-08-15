@@ -1,0 +1,1 @@
+asignaturaId,dni,materia,estado,nota
