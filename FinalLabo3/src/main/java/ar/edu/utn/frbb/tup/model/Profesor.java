@@ -5,11 +5,13 @@ public class Profesor {
     private String nombre;
     private String apellido;
     private String titulo;
+    private String nombreMateria;
 
     public Profesor(String nombre, String apellido, String titulo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.titulo = titulo;
+        this.nombreMateria = nombreMateria;
     }
 
 
@@ -44,4 +46,14 @@ public class Profesor {
     public String getTitulo() {
         return titulo;
     }
+
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
+    }
+
+    public String getNombreMateria() {
+        return nombreMateria;
+    }
 }
+
+
