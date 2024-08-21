@@ -6,6 +6,13 @@
             "name": "FinalLabo3Application",
             "request": "launch",
             "mainClass": "ar.edu.utn.frbb.tup.FinalLabo3Application",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
+            "name": "FinalLabo3Application",
+            "request": "launch",
+            "mainClass": "ar.edu.utn.frbb.tup.FinalLabo3Application",
             "projectName": "FinalLabo3",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal"

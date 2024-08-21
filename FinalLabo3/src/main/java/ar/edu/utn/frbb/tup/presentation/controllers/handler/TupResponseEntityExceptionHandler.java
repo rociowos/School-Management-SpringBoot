@@ -1,6 +1,6 @@
 package ar.edu.utn.frbb.tup.presentation.controllers.handler;
 
-import ar.edu.utn.frbb.tup.exception.*;
+import ar.edu.utn.frbb.tup.exceptions.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

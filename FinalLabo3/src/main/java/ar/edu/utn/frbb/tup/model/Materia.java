@@ -23,10 +23,10 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public String getProfesor() {
+    public Profesor getProfesor() {
         return profesor;
     }
-    public void setProfesor(String profesor) {
+    public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
 

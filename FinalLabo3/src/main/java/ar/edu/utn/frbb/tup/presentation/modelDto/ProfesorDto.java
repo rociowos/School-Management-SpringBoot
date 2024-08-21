@@ -1,3 +1,5 @@
+package ar.edu.utn.frbb.tup.presentation.modelDto;
+
 public class ProfesorDto {
     private String nombre;
     private String apellido;

@@ -1,6 +1,20 @@
+/*package ar.edu.utn.frbb.tup.persistence;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ar.edu.utn.frbb.tup.exceptions.ProfesorNoEncontradoException;
+import ar.edu.utn.frbb.tup.model.Profesor;
+
 public class ProfesorDao {
 
-    private static final String PROFESORTXT = "src\\main\\java\\ar\\edu\\utn\\frbb\\tup\\persistence\\data_base\\profesor.txt";
+    private static final String PROFESORTXT = "FinalLabo3\\src\\main\\java\\ar\\edu\\utn\\frbb\\tup\\persistence\\database\\profesor.txt";
 
 
     public void crearProfesor(Profesor profesor) {
@@ -84,7 +98,7 @@ public class ProfesorDao {
 
         if (profesor != null) {
             try (BufferedWriter escritor = new BufferedWriter(new FileWriter(PROFESORTXT))) {
-                for (String profesorStr : profesorStr) {
+                for (String profesoresStr : profesorStr) {
                     escritor.write(profesorStr);
                     escritor.newLine();
                 }
@@ -170,11 +184,11 @@ public class ProfesorDao {
 
                 try {
                    Profesor profesor = new Profesor();
-                    profesor.setId(Long.parseLong(campos[0]));
-                    profesor.setNombre(campos[1]);
-                    profesor.setApellido(campos[2]);
-                    profesor.setTitulo(campos[3]);
-                    profesor.setnombreMateria(campos[4]);
+                    profesor.setId(Long.parseLong(datos[0]));
+                    profesor.setNombre(datos[1]);
+                    profesor.setApellido(datos[2]);
+                    profesor.setTitulo(datos[3]);
+                    profesor.setnombreMateria(datos[4]);
                     profesores.add(profesor);
             }
         } catch (IOException ex) {
@@ -184,4 +198,6 @@ public class ProfesorDao {
         return profesores;
     }
 
+    
 }
+}*/

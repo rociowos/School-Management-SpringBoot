@@ -1,4 +1,4 @@
-package ar.edu.utn.frbb.tup.exception;
+package ar.edu.utn.frbb.tup.exceptions;
 
 public class ProfesorNoEncontradoException extends Exception {
     public ProfesorNoEncontradoException(String message) {
