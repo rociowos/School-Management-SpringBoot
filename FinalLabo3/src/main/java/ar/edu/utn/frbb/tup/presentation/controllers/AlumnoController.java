@@ -13,6 +13,8 @@ import ar.edu.utn.frbb.tup.presentation.modelDto.AlumnoDto;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,15 +33,24 @@ public class AlumnoController {
     @DeleteMapping("/{dni}")
     public ResponseEntity<Alumno> borrarAlumno(@PathVariable long dni) throws AlumnoNoEncontradoException{   
         return new ResponseEntity<>(alumnoService.borrarAlumno(dni),HttpStatus.OK);
-}
+    }
 
-
-   @PutMapping("/{dni}")
-    public ResponseEntity<Alumno> modificarAlumno(@PathVariable long dni, @RequestBody AlumnoDto alumnodto) throws AlumnoNoEncontradoException {
-        
-        return new ResponseEntity<>(alumnoService.modificarAlumno(alumnodto), HttpStatus.OK);
-    } // el dni no lo cambia y el id pone uno distinto 
+    @PutMapping("/{id}")
+    public ResponseEntity<Alumno> modificarAlumno(@PathVariable long id, @RequestBody AlumnoDto alumnodto) throws AlumnoNoEncontradoException {//clienteValidator.validarCliente(clientedto);
+        return new ResponseEntity<>(alumnoService.modificarAlumno(id, alumnodto), HttpStatus.OK);
+    }
     
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Alumno> mostrarAlumno(@PathVariable long id) throws AlumnoNoEncontradoException {
+        return new ResponseEntity<>(alumnoService.mostrarAlumno(id), HttpStatus.OK);
+    }
 
+   @GetMapping
+    public ResponseEntity<List<Alumno>> getTodosLosAlumnos() throws AlumnoNoEncontradoException, FileNotFoundException, IOException {
+        return new ResponseEntity<>(alumnoService.mostrarTodosLosAlumnos(), HttpStatus.OK);   
+    }
+        
+    
+  
 }

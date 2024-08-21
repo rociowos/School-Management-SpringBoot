@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +66,22 @@ public class AlumnoDao {
         return null;
     }
 
+    public Alumno findById(long id) {
+        try (BufferedReader lector = new BufferedReader(new FileReader(ALUMNOTXT))) {
+            String linea;
+            lector.readLine(); // Leer la cabecera
+            while ((linea = lector.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (Long.parseLong(datos[0]) == id) {
+                    return parseDatosToObjet(datos);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return null;
+    }
+    
 
     public Alumno parseDatosToObjet(String[] datos){
         Alumno alumno = new Alumno();
@@ -118,17 +135,11 @@ public class AlumnoDao {
         boolean alumnoEncontrado = false;
     
         try (BufferedReader lector = new BufferedReader(new FileReader(ALUMNOTXT))) {
-            String linea = lector.readLine();
-            // Agregar la cabecera (primera línea) si existe
-            if (linea != null) {
-                nuevosDatos.add(linea);
-            }
-            
-            while ((linea = lector.readLine()) != null) {
+            String linea = lector.readLine(); 
+            nuevosDatos.add(linea);         
+            while ((linea = lector.readLine()) != null) {               
                 String[] campos = linea.split(",");
-                
-                // Asegúrate de que hay suficientes campos antes de intentar acceder a ellos
-                if (Long.parseLong(campos[1]) == alumno.getDni()) {
+                if (Long.parseLong(campos[0]) == alumno.getId()) {
                     alumnoEncontrado = true;
                     campos[1] = String.valueOf(alumno.getDni());
                     campos[2] = alumno.getNombre();
@@ -138,24 +149,24 @@ public class AlumnoDao {
                     nuevosDatos.add(linea);
                 }
             }
-            
-            if (!alumnoEncontrado) {
-                throw new AlumnoNoEncontradoException("El alumno con DNI " + alumno.getDni() + " no fue encontrado.");
-            }
         } catch (IOException e) {
-            e.printStackTrace(); // Maneja la excepción de I/O
+            e.printStackTrace();
         }
     
-        // Aquí debes escribir los nuevos datos de vuelta al archivo
+        if (!alumnoEncontrado) {
+            throw new AlumnoNoEncontradoException("Alumno no encontrado con ID: " + alumno.getId());
+        }
+    
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ALUMNOTXT))) {
-            for (String nuevoDato : nuevosDatos) {
-                escritor.write(nuevoDato);
+            for (String datos : nuevosDatos) {
+                escritor.write(datos);
                 escritor.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Maneja la excepción de I/O
+            e.printStackTrace();
         }
     }
+    
 
 
     public Alumno mostrarAlumno(long id) {
@@ -179,28 +190,34 @@ public class AlumnoDao {
         return null;
     }
 
-    public List<Alumno> mostrarTodosLosAlumnos() throws FileNotFoundException, IOException {
+    public List<Alumno> mostrarTodosLosAlumnos() {
         List<Alumno> alumnos = new ArrayList<>();
-
+    
         try (BufferedReader lector = new BufferedReader(new FileReader(ALUMNOTXT))) {
             String linea;
             linea = lector.readLine();
             while ((linea = lector.readLine()) != null) {
-
+                
                 String[] datos = linea.split(",");
-
-                Alumno alumno = new Alumno();
-                alumno.setId(Long.parseLong(datos[0]));
-                alumno.setDni(Long.parseLong(datos[1]));
-                alumno.setNombre(datos[2]);
-                alumno.setApellido(datos[3]);
-                alumnos.add(alumno);
-
+    
+                try {
+                    Alumno alumno = new Alumno();
+                    alumno.setId(Long.parseLong(datos[0]));
+                    alumno.setDni(Long.parseLong(datos[1]));
+                    alumno.setNombre(datos[2]);
+                    alumno.setApellido(datos[3]);
+                    alumnos.add(alumno);
+    
+                } catch (DateTimeParseException e) {
+                    System.err.println("Error al parsear la fecha en la línea: " + linea);
+                }
+            }
+        } catch (IOException ex) {
+            System.err.println("Error al leer el archivo: " + ex.getMessage());
+        }
+    
         return alumnos;
     }
+}
+    
 
-
-}
-        return alumnos;
-}
-}

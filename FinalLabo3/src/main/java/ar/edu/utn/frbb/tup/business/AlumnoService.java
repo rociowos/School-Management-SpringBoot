@@ -1,5 +1,9 @@
 package ar.edu.utn.frbb.tup.business;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +23,11 @@ public class AlumnoService {
     @Autowired 
     private AlumnoDao alumnoDao;
 
-    public Alumno modificarAlumno(AlumnoDto alumnodto) throws AlumnoNoEncontradoException{
+   /* public Alumno modificarAlumno(AlumnoDto alumnodto) throws AlumnoNoEncontradoException{
         Alumno alumno = new Alumno(alumnodto);
         alumnoDao.modificarAlumno(alumno);
         return alumno; 
-    }
+    } */
 
     public Alumno crearAlumno(AlumnoDto alumnodto) throws AlumnoAlreadyExistsException{
         Alumno alumno = new Alumno(alumnodto);
@@ -44,7 +48,40 @@ public class AlumnoService {
         return alumnoExistente; 
     }
 
- 
+    public Alumno modificarAlumno(long id, AlumnoDto alumnodto) throws AlumnoNoEncontradoException {
+        
+        Alumno alumnoExistente = alumnoDao.findById(id);
+        if (alumnoExistente == null) {
+            throw new AlumnoNoEncontradoException("El alumno con el ID " + id + " no fue encontrado.");
+        }
+    
+        // Actualizar la información del alumno
+        alumnoExistente.setDni(Long.parseLong(alumnodto.getDni()));
+        alumnoExistente.setNombre(alumnodto.getNombre());
+        alumnoExistente.setApellido(alumnodto.getApellido());
+    
+        alumnoDao.modificarAlumno(alumnoExistente);
+        return alumnoExistente;
+    }
+    
+
+    public Alumno mostrarAlumno(long id) throws AlumnoNoEncontradoException {
+        Alumno alumno = alumnoDao.mostrarAlumno(id);
+        if (alumno == null) {
+            throw new AlumnoNoEncontradoException("No se encontro el alumno con id: " + id);
+        }
+        return alumno;
+    }
+
+
+    public List<Alumno> mostrarTodosLosAlumnos() throws AlumnoNoEncontradoException, FileNotFoundException, IOException {
+        List<Alumno> todosLosAlumnos = alumnoDao.mostrarTodosLosAlumnos();
+        if (todosLosAlumnos.isEmpty()) {
+            throw new AlumnoNoEncontradoException("No se encontraron alumnos");
+        }
+        return alumnoDao.mostrarTodosLosAlumnos();
+    }
 }
+
 
     
