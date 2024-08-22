@@ -4,7 +4,7 @@ public class ProfesorDto {
     private String nombre;
     private String apellido;
     private String titulo;
-    private String nombreMateria;
+    private String nombremateria;
 
     public String getNombre() {
         return nombre;
@@ -31,11 +31,11 @@ public class ProfesorDto {
     }
 
     public String getnombreMateria() {
-        return nombreMateria;
+        return nombremateria;
     }
 
-    public void setnombreMateria(String nombreMateria) {
-        this.nombreMateria = nombreMateria;
+    public void setnombreMateria(String nombremateria) {
+        this.nombremateria = nombremateria;
     }
 }
 

@@ -1,4 +1,4 @@
-package ar.edu.utn.frbb.tup.business;
+package ar.edu.utn.frbb.tup.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,11 +23,6 @@ public class AlumnoService {
     @Autowired 
     private AlumnoDao alumnoDao;
 
-   /* public Alumno modificarAlumno(AlumnoDto alumnodto) throws AlumnoNoEncontradoException{
-        Alumno alumno = new Alumno(alumnodto);
-        alumnoDao.modificarAlumno(alumno);
-        return alumno; 
-    } */
 
     public Alumno crearAlumno(AlumnoDto alumnodto) throws AlumnoAlreadyExistsException{
         Alumno alumno = new Alumno(alumnodto);
@@ -55,7 +50,7 @@ public class AlumnoService {
             throw new AlumnoNoEncontradoException("El alumno con el ID " + id + " no fue encontrado.");
         }
     
-        // Actualizar la información del alumno
+        
         alumnoExistente.setDni(Long.parseLong(alumnodto.getDni()));
         alumnoExistente.setNombre(alumnodto.getNombre());
         alumnoExistente.setApellido(alumnodto.getApellido());

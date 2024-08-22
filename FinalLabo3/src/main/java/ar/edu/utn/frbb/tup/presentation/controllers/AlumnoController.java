@@ -7,7 +7,7 @@ import ar.edu.utn.frbb.tup.exceptions.*;
 import ar.edu.utn.frbb.tup.model.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ar.edu.utn.frbb.tup.business.AlumnoService;
+import ar.edu.utn.frbb.tup.service.AlumnoService;
 import ar.edu.utn.frbb.tup.presentation.modelDto.AlumnoDto;
 
 

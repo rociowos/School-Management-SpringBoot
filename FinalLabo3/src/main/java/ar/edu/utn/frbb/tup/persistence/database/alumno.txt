@@ -1,4 +1,3 @@
 id,dni,nombre,apellido
 3565,4412345,jorge,lopez
 3587,44661663,jorge,cerda
-5304,44115756,rocio,woscoff

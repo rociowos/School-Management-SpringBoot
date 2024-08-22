@@ -1,4 +1,4 @@
-/*package ar.edu.utn.frbb.tup.persistence;
+package ar.edu.utn.frbb.tup.persistence;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,12 +6,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 import ar.edu.utn.frbb.tup.exceptions.ProfesorNoEncontradoException;
 import ar.edu.utn.frbb.tup.model.Profesor;
 
+
+@Repository
 public class ProfesorDao {
 
     private static final String PROFESORTXT = "FinalLabo3\\src\\main\\java\\ar\\edu\\utn\\frbb\\tup\\persistence\\database\\profesor.txt";
@@ -21,7 +25,7 @@ public class ProfesorDao {
         boolean archivoNuevo = !(new File(PROFESORTXT).exists());
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(PROFESORTXT, true))) {
             if (archivoNuevo) {
-                escritor.write("id,nombre,apellido,titulo,nombreMateria");
+                escritor.write("id,nombre,apellido,titulo,nombremateria ");
                 escritor.newLine();
             }
             escritor.write(profesorToTxt(profesor));
@@ -35,34 +39,28 @@ public class ProfesorDao {
     private String profesorToTxt(Profesor profesor) {
         return  profesor.getId() + "," +
                 profesor.getNombre() + "," +
-                profesor.getApellido() + "," +
+                profesor.getApellido()+ "," +
                 profesor.getTitulo() + "," +
-                profesor.getnombreMateria();
-
+                profesor.getNombreMateria();
     }
+
 
     public Profesor findById(long id) {
         try (BufferedReader lector = new BufferedReader(new FileReader(PROFESORTXT))) {
             String linea;
-            lector.readLine();
+            lector.readLine(); 
             while ((linea = lector.readLine()) != null) {
                 String[] datos = linea.split(",");
                 if (Long.parseLong(datos[0]) == id) {
-                    Profesor profesor = new Profesor();
-                    profesor.setId(Long.parseLong(datos[0]));
-                    profesor.setNombre(datos[1]);
-                    profesor.setApellido(datos[2]);
-                    profesor.setTitulo(datos[3]);
-                    profesor.setnombreMateria(datos[4]);
-                    return profesor;
+                    return parseDatosToObjet(datos);
                 }
             }
-        } catch (IOException ex) {
-            System.err.println("Error al leer el archivo: " + ex.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
         }
         return null;
     }
-
+    
 
     public Profesor parseDatosToObjet(String[] datos){
         Profesor profesor = new Profesor();
@@ -70,23 +68,23 @@ public class ProfesorDao {
         profesor.setNombre(datos[1]);
         profesor.setApellido(datos[2]);
         profesor.setTitulo(datos[3]);
-        profesor.setnombreMateria(datos[4]);
+        profesor.setNombreMateria(datos[4]);
         return profesor;
     }
 
     public Profesor borrarProfesor(long id) {
-        List<Profesor> profesor = new ArrayList<>();
-        List<String> profesorStr = new ArrayList<>();
+        List<Profesor> profesores = new ArrayList<>();
+        List<String> profesoresStr = new ArrayList<>();
         Profesor profesor = null;
         try (BufferedReader lector = new BufferedReader(new FileReader(PROFESORTXT))) {
             String linea;
             linea = lector.readLine();
-            profesorStr.add(linea);
+            profesoresStr.add(linea);
             while ((linea = lector.readLine()) != null) {
                 String[] campos = linea.split(",");
                 if (Long.parseLong(campos[0]) != id) {
-                    profesor.add(parseDatosToObjet(campos));
-                    profesorStr.add(linea);
+                    profesores.add(parseDatosToObjet(campos));
+                    profesoresStr.add(linea);
                 } else {
                     profesor = parseDatosToObjet(campos);
                 }
@@ -98,7 +96,7 @@ public class ProfesorDao {
 
         if (profesor != null) {
             try (BufferedWriter escritor = new BufferedWriter(new FileWriter(PROFESORTXT))) {
-                for (String profesoresStr : profesorStr) {
+                for (String profesorStr : profesoresStr) {
                     escritor.write(profesorStr);
                     escritor.newLine();
                 }
@@ -115,18 +113,18 @@ public class ProfesorDao {
     public void modificarProfesor(Profesor profesor) throws ProfesorNoEncontradoException {
         List<String> nuevosDatos = new ArrayList<>();
         boolean profesorEncontrado = false;
-
+    
         try (BufferedReader lector = new BufferedReader(new FileReader(PROFESORTXT))) {
-            String linea = lector.readLine();
-            nuevosDatos.add(linea);
-            while ((linea = lector.readLine()) != null) {
+            String linea = lector.readLine(); 
+            nuevosDatos.add(linea);         
+            while ((linea = lector.readLine()) != null) {               
                 String[] campos = linea.split(",");
                 if (Long.parseLong(campos[0]) == profesor.getId()) {
-                    profesorEncontrado = true;
+                   profesorEncontrado = true;
                     campos[1] = profesor.getNombre();
                     campos[2] = profesor.getApellido();
                     campos[3] = profesor.getTitulo();
-                    campos[4] = profesor.getnombreMateria();
+                    campos[4] = profesor.getNombreMateria();
                     nuevosDatos.add(String.join(",", campos));
                 } else {
                     nuevosDatos.add(linea);
@@ -135,11 +133,11 @@ public class ProfesorDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    
         if (!profesorEncontrado) {
             throw new ProfesorNoEncontradoException("Profesor no encontrado con ID: " + profesor.getId());
         }
-
+    
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(PROFESORTXT))) {
             for (String datos : nuevosDatos) {
                 escritor.write(datos);
@@ -149,6 +147,8 @@ public class ProfesorDao {
             e.printStackTrace();
         }
     }
+    
+
 
     public Profesor mostrarProfesor(long id) {
         try (BufferedReader lector = new BufferedReader(new FileReader(PROFESORTXT))) {
@@ -162,7 +162,7 @@ public class ProfesorDao {
                     profesor.setNombre(campos[1]);
                     profesor.setApellido(campos[2]);
                     profesor.setTitulo(campos[3]);
-                    profesor.setnombreMateria(campos[4]);
+                    profesor.setNombreMateria(campos[4]);
                     return profesor;
                 }
             }
@@ -174,30 +174,34 @@ public class ProfesorDao {
 
     public List<Profesor> mostrarTodosLosProfesores() {
         List<Profesor> profesores = new ArrayList<>();
-
+    
         try (BufferedReader lector = new BufferedReader(new FileReader(PROFESORTXT))) {
             String linea;
             linea = lector.readLine();
             while ((linea = lector.readLine()) != null) {
-
+                
                 String[] datos = linea.split(",");
-
+    
                 try {
-                   Profesor profesor = new Profesor();
+                    Profesor profesor = new Profesor();
                     profesor.setId(Long.parseLong(datos[0]));
                     profesor.setNombre(datos[1]);
                     profesor.setApellido(datos[2]);
                     profesor.setTitulo(datos[3]);
-                    profesor.setnombreMateria(datos[4]);
+                    profesor.setNombreMateria(datos[4]);
                     profesores.add(profesor);
+    
+                } catch (DateTimeParseException e) {
+                    System.err.println("Error al parsear la fecha en la línea: " + linea);
+                }
             }
         } catch (IOException ex) {
             System.err.println("Error al leer el archivo: " + ex.getMessage());
         }
-
+    
         return profesores;
     }
-
-    
+    //obtener todas las materias que dicta un profesor en orden alfabetico
 }
-}*/
+    
+

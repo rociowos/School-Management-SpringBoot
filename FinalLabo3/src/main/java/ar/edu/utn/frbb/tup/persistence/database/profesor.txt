@@ -1,1 +1,2 @@
-id,nombre,apellido,titulo
+id,nombre,apellido,titulo,nombremateria
+8073,Lorena,Cofre,Contadora,null
