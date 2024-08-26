@@ -1,2 +1,4 @@
 id,nombre,apellido,titulo,nombremateria
-8073,Lorena,Cofre,Contadora,null
+1470,Lorena,Cofre,Matematica,Matematica 1, Matematica 2
+2545,Luciano,Salotto,Programador,Laboratorio 3
+2897,Uriel,Blanco,programador,Ingles

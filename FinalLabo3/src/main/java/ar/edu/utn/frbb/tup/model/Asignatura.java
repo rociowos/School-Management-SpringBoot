@@ -2,11 +2,11 @@ package ar.edu.utn.frbb.tup.model;
 
 public class Asignatura {
 
-    private Long asignaturaId;
-    private Materia materia;
+    private long asignaturaId;
+    private Materia materia; //idmateria
     private EstadoAsignatura estado;
     private Integer nota;
-
+    //idalumno
     public Asignatura() {
     }
     public Asignatura(Materia materia, long asignaturaId) {
@@ -15,11 +15,11 @@ public class Asignatura {
         this.estado = EstadoAsignatura.NO_CURSADA;
     }
 
-    public void setAsignaturaId(Long asignaturaId) {
+    public void setAsignaturaId(long asignaturaId) {
         this.asignaturaId = asignaturaId;
     }
 
-    public Long getAsignaturaId() {
+    public long getAsignaturaId() {
         return asignaturaId;
     }
 

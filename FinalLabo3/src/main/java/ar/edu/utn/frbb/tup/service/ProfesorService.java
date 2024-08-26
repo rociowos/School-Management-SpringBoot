@@ -22,10 +22,10 @@ public class ProfesorService {
 
     public Profesor crearProfesor(ProfesorDto profesordto) throws ProfesorAlreadyExistsException{
         Profesor profesor = new Profesor(profesordto);
-        /*Profesor profesorExistente = profesorDao.findById(profesor.getId());
+        Profesor profesorExistente = profesorDao.findById(profesor.getId());
         if (profesorExistente != null){
             throw new ProfesorAlreadyExistsException("El profesor con ese ID ya existe");
-        }*/
+        }
         profesorDao.crearProfesor(profesor);
         return profesor; 
     }

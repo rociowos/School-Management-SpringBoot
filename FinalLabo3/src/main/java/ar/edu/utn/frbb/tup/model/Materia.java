@@ -1,18 +1,24 @@
 package ar.edu.utn.frbb.tup.model;
 
+import java.util.List;
+import java.util.Random;
+
+import ar.edu.utn.frbb.tup.presentation.modelDto.MateriaDto;
+
 public class Materia {
 
-    private int idmateria;
+    private long idmateria;
     private String nombre;
-    private Profesor profesor;
-    private int anio;
-    private int cuatrimestre;
+    private long profesorid;
+    private long anio;
+    private long cuatrimestre;
+    private List<Long> correlatividades;
 
 
-    public int getIdmateria() {
+    public long getIdmateria() {
         return idmateria;
     }
-    public void setIdmateria(int idmateria) {
+    public void setIdmateria(long idmateria) {
         this.idmateria = idmateria;
     }
 
@@ -23,36 +29,75 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public Profesor getProfesor() {
-        return profesor;
+    public long getProfesorid() {
+        return profesorid;
     }
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
+    public void setProfesorid(long profesorid) {
+        this.profesorid = profesorid;
     }
 
-    public int getAnio() {
+    public long getAnio() {
         return anio;
     }
 
-    public void setAnio(int anio) {
+    public void setAnio(long anio) {
         this.anio = anio;
     }
 
-    public int getCuatrimestre() {
+    public long getCuatrimestre() {
         return cuatrimestre;
     }
 
-    public void setCuatrimestre(int cuatrimestre) {
+    public void setCuatrimestre(long cuatrimestre) {
         this.cuatrimestre = cuatrimestre;
     }
 
-    public Materia(){}
+    public List<Long> getCorrelatividades() {
+        return correlatividades;
+    }
 
-    public Materia(String nombre, Profesor profesor, int anio, int cuatrimestre ) {
-        this.anio = anio;
-        this.profesor = profesor;
-        this.cuatrimestre = cuatrimestre;
+    public void setCorrelatividades(List<Long> correlatividades) {
+        this.correlatividades = correlatividades;
+    }
+
+    //public Materia(){}
+
+    public Materia(String nombre, long profesorid, long anio, long cuatrimestre, List<Long>correlatividades ) {
         this.nombre = nombre;
+        this.profesorid = profesorid;
+        this.anio = anio;
+        this.cuatrimestre = cuatrimestre;
+        this.correlatividades = correlatividades; 
+        
 
     }
+
+    
+    public Materia(){
+        super();
+    }
+
+    public Materia (MateriaDto materiadto){
+        this.nombre = materiadto.getNombre();
+        this.profesorid = materiadto.getProfesorid();
+        this.anio = materiadto.getAnio();
+        this.cuatrimestre = materiadto.getCuatrimestre();
+        this.correlatividades = materiadto.getCorrelatividades();
+        this.idmateria = Materia.generarIdMateria();
+
+
+    }
+
+    public static long generarIdMateria() {
+        Random random = new Random();
+        StringBuilder idBuilder = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            idBuilder.append(random.nextInt(10)); 
+        }
+        return Long.parseLong(idBuilder.toString());
+    }
+
 }
+
+
+
