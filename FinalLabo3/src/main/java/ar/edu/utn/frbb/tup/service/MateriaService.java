@@ -42,22 +42,11 @@ public class MateriaService {
         return materiaExistente; 
     }
 
-    public Materia modificarMateria (long idmateria, MateriaDto materiadto) throws MateriaNoEncontradaException {
-        
-       Materia materiaExistente = materiaDao.findById(idmateria);
-        if (materiaExistente == null) {
-            throw new MateriaNoEncontradaException("La materia con el ID " + idmateria + " no fue encontrada.");
-        }
-    
-        
-        materiaExistente.setNombre(materiadto.getNombre());
-        materiaExistente.setProfesorid(materiadto.getProfesorid());
-        materiaExistente.setAnio(materiadto.getAnio());
-        materiaExistente.setCuatrimestre(materiadto.getCuatrimestre());
-        materiaExistente.setCorrelatividades(materiadto.getCorrelatividades());
-    
-        materiaDao.modificarMateria(materiaExistente);
-        return materiaExistente;
+    public Materia modificarMateria(MateriaDto materiadto) throws MateriaNoEncontradaException {
+        Materia materia = new Materia(materiadto);
+        materiaDao.modificarMateria(materia);
+
+        return materia;
     }
  
     public Materia mostrarMateria(long idmateria) throws MateriaNoEncontradaException {

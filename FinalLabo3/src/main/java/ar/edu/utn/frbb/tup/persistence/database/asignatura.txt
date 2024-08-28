@@ -1,1 +1,3 @@
-asignaturaId,dni,materia,estado,nota
+asignaturaId,idmateria,estado,nota,alumnoid
+5007,1234,NO_CURSADA,8,1234
+841,1234,CURSADA,8,1234

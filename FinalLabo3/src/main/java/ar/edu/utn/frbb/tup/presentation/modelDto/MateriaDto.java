@@ -5,9 +5,9 @@ import java.util.List;
 
 public class MateriaDto {
     private String nombre;
-    private Long profesorid;
-    private long anio;
-    private long cuatrimestre;
+    private String profesorid;
+    private String anio;
+    private String cuatrimestre;
     private List<Long> correlatividades;
 
 
@@ -19,26 +19,26 @@ public class MateriaDto {
     }
 
    
-    public long getProfesorid() {
+    public String getProfesorid() {
         return profesorid;
     }
-    public void setProfesorid(long profesorid) {
+    public void setProfesorid(String profesorid) {
         this.profesorid = profesorid;
     }
 
-    public long getAnio() {
+    public String getAnio() {
         return anio;
     }
 
-    public void setAnio(long anio) {
+    public void setAnio(String anio) {
         this.anio = anio;
     }
 
-    public long getCuatrimestre() {
+    public String getCuatrimestre() {
         return cuatrimestre;
     }
 
-    public void setCuatrimestre(long cuatrimestre) {
+    public void setCuatrimestre(String cuatrimestre) {
         this.cuatrimestre = cuatrimestre;
  
     }

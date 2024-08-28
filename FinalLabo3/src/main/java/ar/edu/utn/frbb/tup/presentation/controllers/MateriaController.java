@@ -36,7 +36,7 @@ public class MateriaController {
 
     @PutMapping("/{idmateria}")
     public ResponseEntity<Materia> modificarMateria(@PathVariable long idmateria, @RequestBody MateriaDto materiadto) throws MateriaNoEncontradaException {//clienteValidator.validarCliente(clientedto);
-        return new ResponseEntity<>(materiaService.modificarMateria(idmateria, materiadto), HttpStatus.OK);
+        return new ResponseEntity<>(materiaService.modificarMateria(materiadto), HttpStatus.OK);
     }
     
 

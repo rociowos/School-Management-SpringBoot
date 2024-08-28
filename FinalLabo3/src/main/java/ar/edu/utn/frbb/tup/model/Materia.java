@@ -62,7 +62,7 @@ public class Materia {
 
     //public Materia(){}
 
-    public Materia(String nombre, long profesorid, long anio, long cuatrimestre, List<Long>correlatividades ) {
+   /*  public Materia(String nombre, long profesorid, long anio, long cuatrimestre, List<Long>correlatividades ) {
         this.nombre = nombre;
         this.profesorid = profesorid;
         this.anio = anio;
@@ -70,7 +70,7 @@ public class Materia {
         this.correlatividades = correlatividades; 
         
 
-    }
+    }*/
 
     
     public Materia(){
@@ -79,9 +79,9 @@ public class Materia {
 
     public Materia (MateriaDto materiadto){
         this.nombre = materiadto.getNombre();
-        this.profesorid = materiadto.getProfesorid();
-        this.anio = materiadto.getAnio();
-        this.cuatrimestre = materiadto.getCuatrimestre();
+        this.profesorid = Long.parseLong(materiadto.getProfesorid());
+        this.anio = Long.parseLong(materiadto.getAnio());
+        this.cuatrimestre = Long.parseLong(materiadto.getCuatrimestre());
         this.correlatividades = materiadto.getCorrelatividades();
         this.idmateria = Materia.generarIdMateria();
 
