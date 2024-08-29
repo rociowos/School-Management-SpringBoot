@@ -3,6 +3,7 @@ package ar.edu.utn.frbb.tup.presentation.controllers;
 import ar.edu.utn.frbb.tup.exceptions.*;
 import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.presentation.modelDto.ProfesorDto;
+import ar.edu.utn.frbb.tup.presentation.validator.ProfesorValidator;
 import ar.edu.utn.frbb.tup.service.ProfesorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,12 @@ public class ProfesorController {
     @Autowired
     private ProfesorService profesorService;
 
-   
+   @Autowired
+    private ProfesorValidator profesorValidator;
+
     @PostMapping
     public ResponseEntity<Profesor> darDeAltaProfesor(@RequestBody ProfesorDto profesordto) throws ProfesorAlreadyExistsException {
+        profesorValidator.validarProfesor(profesordto);
         return new ResponseEntity<>(profesorService.crearProfesor(profesordto), HttpStatus.CREATED);
     }
 
@@ -33,7 +37,8 @@ public class ProfesorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Profesor> modificarProfesor(@PathVariable long id, @RequestBody ProfesorDto profesordto) throws ProfesorNoEncontradoException {//clienteValidator.validarCliente(clientedto);
+    public ResponseEntity<Profesor> modificarProfesor(@PathVariable long id, @RequestBody ProfesorDto profesordto) throws ProfesorNoEncontradoException {
+        profesorValidator.validarProfesor(profesordto);
         return new ResponseEntity<>(profesorService.modificarProfesor(id, profesordto), HttpStatus.OK);
     }
     

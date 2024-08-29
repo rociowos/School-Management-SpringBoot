@@ -1,3 +1,5 @@
-asignaturaId,idmateria,estado,nota,alumnoid
+asignaturaId,idmateria,estadoAsignatura,nota,alumnoid
 5007,1234,NO_CURSADA,8,1234
 841,1234,CURSADA,8,1234
+4462,1234,NO_CURSADA,0,1234
+3142,1234,NO_CURSADA,0,1234

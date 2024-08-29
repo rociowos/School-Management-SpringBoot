@@ -3,6 +3,7 @@ package ar.edu.utn.frbb.tup.presentation.controllers;
 import ar.edu.utn.frbb.tup.exceptions.*;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.presentation.modelDto.MateriaDto;
+import ar.edu.utn.frbb.tup.presentation.validator.MateriaValidator;
 import ar.edu.utn.frbb.tup.service.MateriaService;
 
 import java.io.FileNotFoundException;
@@ -23,9 +24,13 @@ public class MateriaController {
     @Autowired
     private MateriaService materiaService;
 
+    @Autowired
+    private MateriaValidator materiaValidator;
+
    
     @PostMapping
     public ResponseEntity<Materia> darDeAltaMateria(@RequestBody MateriaDto materiadto) throws MateriaAlreadyExistsException {
+        materiaValidator.validarMateria(materiadto);
         return new ResponseEntity<>(materiaService.crearMateria(materiadto), HttpStatus.CREATED);
     }
 
@@ -35,7 +40,8 @@ public class MateriaController {
     }
 
     @PutMapping("/{idmateria}")
-    public ResponseEntity<Materia> modificarMateria(@PathVariable long idmateria, @RequestBody MateriaDto materiadto) throws MateriaNoEncontradaException {//clienteValidator.validarCliente(clientedto);
+    public ResponseEntity<Materia> modificarMateria(@PathVariable long idmateria, @RequestBody MateriaDto materiadto) throws MateriaNoEncontradaException {
+        materiaValidator.validarMateria(materiadto);
         return new ResponseEntity<>(materiaService.modificarMateria(materiadto), HttpStatus.OK);
     }
     

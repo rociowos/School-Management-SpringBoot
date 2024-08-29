@@ -19,9 +19,9 @@ import ar.edu.utn.frbb.tup.exceptions.CarreraAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.CarreraNoEncontradaException;
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.presentation.modelDto.CarreraDto;
+import ar.edu.utn.frbb.tup.presentation.validator.CarreraValidator;
+
 import ar.edu.utn.frbb.tup.service.CarreraService;
-
-
 
 
 @RestController
@@ -32,9 +32,14 @@ public class CarreraController {
     @Autowired
     private CarreraService carreraService;
 
+    @Autowired
+    private CarreraValidator carreraValidator;
+
+
    
     @PostMapping
     public ResponseEntity<Carrera> darDeAltaCarrera(@RequestBody CarreraDto carreradto) throws CarreraAlreadyExistsException { 
+        carreraValidator.validarCarrera(carreradto);
         return new ResponseEntity<>(carreraService.crearCarrera(carreradto), HttpStatus.CREATED);
     }
 

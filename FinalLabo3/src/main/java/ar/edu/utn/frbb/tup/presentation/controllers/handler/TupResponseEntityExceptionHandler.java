@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class TupResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value
-            = {AlumnoAlreadyExistsException.class, ProfesorAlreadyExistsException.class})
+            = {AlumnoAlreadyExistsException.class, ProfesorAlreadyExistsException.class, IllegalArgumentException.class})
     protected ResponseEntity<Object> handleBadRequest(
             Exception ex, WebRequest request) {
         String exceptionMessage = ex.getMessage();

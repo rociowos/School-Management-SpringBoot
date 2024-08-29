@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ar.edu.utn.frbb.tup.service.AlumnoService;
 import ar.edu.utn.frbb.tup.presentation.modelDto.AlumnoDto;
-
+import ar.edu.utn.frbb.tup.presentation.validator.AlumnoValidator;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +24,14 @@ public class AlumnoController {
     @Autowired
     private AlumnoService alumnoService;
 
+    @Autowired
+    private AlumnoValidator alumnoValidator;
+    
+
    
     @PostMapping
     public ResponseEntity<Alumno> darDeAltaAlumno(@RequestBody AlumnoDto alumnodto) throws AlumnoAlreadyExistsException {
+        alumnoValidator.validarAlumno(alumnodto);
         return new ResponseEntity<>(alumnoService.crearAlumno(alumnodto), HttpStatus.CREATED);
     }
 
@@ -36,7 +41,8 @@ public class AlumnoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Alumno> modificarAlumno(@PathVariable long id, @RequestBody AlumnoDto alumnodto) throws AlumnoNoEncontradoException {//clienteValidator.validarCliente(clientedto);
+    public ResponseEntity<Alumno> modificarAlumno(@PathVariable long id, @RequestBody AlumnoDto alumnodto) throws AlumnoNoEncontradoException {
+        alumnoValidator.validarAlumno(alumnodto);
         return new ResponseEntity<>(alumnoService.modificarAlumno(id, alumnodto), HttpStatus.OK);
     }
     

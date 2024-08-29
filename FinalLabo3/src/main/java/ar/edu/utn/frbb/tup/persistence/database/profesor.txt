@@ -2,3 +2,4 @@ id,nombre,apellido,titulo,nombremateria
 1470,Lorena,Cofre,Matematica,Matematica 1, Matematica 2
 2545,Luciano,Salotto,Programador,Laboratorio 3
 2897,Uriel,Blanco,programador,Ingles
+4817,,aa,geologo,null

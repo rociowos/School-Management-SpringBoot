@@ -24,7 +24,7 @@ public class AsignaturaDao {
         boolean archivoNuevo = !(new File(ASIGNATURATXT).exists());
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ASIGNATURATXT, true))) {
             if (archivoNuevo) {
-                escritor.write("asignaturaId,idmateria,estado,nota,alumnoid ");
+                escritor.write("asignaturaId,idmateria,estadoAsignatura,nota,alumnoid ");
                 escritor.newLine();
             }
             escritor.write(asignaturaToTxt(asignatura));
