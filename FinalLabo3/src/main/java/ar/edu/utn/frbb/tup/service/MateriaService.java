@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.utn.frbb.tup.exceptions.MateriaAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.MateriaNoEncontradaException;
+import ar.edu.utn.frbb.tup.exceptions.ProfesorNoEncontradoException;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
+import ar.edu.utn.frbb.tup.persistence.ProfesorDao;
 import ar.edu.utn.frbb.tup.presentation.modelDto.MateriaDto;
 
 
@@ -22,12 +24,18 @@ public class MateriaService {
     @Autowired 
     private MateriaDao materiaDao;
 
+    @Autowired
+    private ProfesorDao profesorDao; 
 
-    public Materia crearMateria(MateriaDto materiadto) throws MateriaAlreadyExistsException{
+
+    public Materia crearMateria(MateriaDto materiadto) throws MateriaAlreadyExistsException, ProfesorNoEncontradoException{
         Materia materia = new Materia(materiadto);
         Materia materiaExistente = materiaDao.findById(materia.getIdmateria());
         if (materiaExistente != null){
             throw new MateriaAlreadyExistsException("La materia con ese ID ya existe");
+        }
+        if (profesorDao.findById(materia.getProfesorid()) == null){ 
+            throw new ProfesorNoEncontradoException ("No se encontro el profesor con el ID proporcionado");
         }
         materiaDao.crearMateria(materia);
         return materia; 

@@ -3,10 +3,14 @@ package ar.edu.utn.frbb.tup.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.utn.frbb.tup.exceptions.AlumnoNoEncontradoException;
 import ar.edu.utn.frbb.tup.exceptions.AsignaturaAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.AsignaturaNoEncontradaException;
+import ar.edu.utn.frbb.tup.exceptions.MateriaNoEncontradaException;
 import ar.edu.utn.frbb.tup.model.Asignatura;
+import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
 import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
+import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.presentation.modelDto.AsignaturaDto;
 
 @Service
@@ -15,12 +19,26 @@ public class AsignaturaService {
     @Autowired 
     private AsignaturaDao asignaturaDao;
 
+    @Autowired
+    private AlumnoDao alumnoDao;
 
-    public Asignatura crearAsignatura(AsignaturaDto asignaturadto) throws AsignaturaAlreadyExistsException{
+    @Autowired
+    private MateriaDao materiaDao;
+
+
+    
+    public Asignatura crearAsignatura(AsignaturaDto asignaturadto) throws AsignaturaAlreadyExistsException, MateriaNoEncontradaException, AlumnoNoEncontradoException{
         Asignatura asignatura= new Asignatura(asignaturadto);
         Asignatura asignaturaExistente = asignaturaDao.findByAsignaturaId(asignatura.getAsignaturaId());
         if (asignaturaExistente != null){
             throw new AsignaturaAlreadyExistsException("La asignatura con ese ID ya existe");
+        }
+        if (materiaDao.findById(asignatura.getIdmateria()) == null){
+            throw new MateriaNoEncontradaException("La materia con ese ID no se encontro");
+        }
+
+        if (alumnoDao.findById(asignatura.getAlumnoid()) == null) {
+            throw new AlumnoNoEncontradoException("No se encontro un alumno con ese ID");
         }
         asignaturaDao.crearAsignatura(asignatura);
         return asignatura; 
@@ -32,6 +50,7 @@ public class AsignaturaService {
             throw new AsignaturaNoEncontradaException("No se encontró una asignatura con el ID proporcionado");
         }
         asignaturaDao.borrarAsignatura(asignaturaExistente.getAsignaturaId()); 
+
         return asignaturaExistente; 
     }
     
@@ -47,6 +66,8 @@ public class AsignaturaService {
         return asignatura;
     }
     
+
+
 }
 
 

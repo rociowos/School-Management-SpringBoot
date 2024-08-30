@@ -21,7 +21,6 @@ public class AsignaturaValidator {
         if (Integer.parseInt(asignaturadto.getNota()) > 10) { 
             throw new IllegalArgumentException("La nota del alumno no puede ser mayor a 10");
         }
-        //idmateria
-        //alumnoid
+        
     }
 }

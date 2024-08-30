@@ -27,7 +27,7 @@ public class TupResponseEntityExceptionHandler extends ResponseEntityExceptionHa
     }
 
     @ExceptionHandler(value
-            = {AlumnoNoEncontradoException.class, ProfesorNoEncontradoException.class})
+            = {AlumnoNoEncontradoException.class, ProfesorNoEncontradoException.class, MateriaNoEncontradaException.class})
     protected ResponseEntity<Object> handleMateriaNotFound(
             Exception ex, WebRequest request) {
         String exceptionMessage = ex.getMessage();

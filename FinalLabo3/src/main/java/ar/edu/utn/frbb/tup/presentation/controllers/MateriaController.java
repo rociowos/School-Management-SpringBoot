@@ -29,7 +29,7 @@ public class MateriaController {
 
    
     @PostMapping
-    public ResponseEntity<Materia> darDeAltaMateria(@RequestBody MateriaDto materiadto) throws MateriaAlreadyExistsException {
+    public ResponseEntity<Materia> darDeAltaMateria(@RequestBody MateriaDto materiadto) throws MateriaAlreadyExistsException, ProfesorNoEncontradoException {
         materiaValidator.validarMateria(materiadto);
         return new ResponseEntity<>(materiaService.crearMateria(materiadto), HttpStatus.CREATED);
     }

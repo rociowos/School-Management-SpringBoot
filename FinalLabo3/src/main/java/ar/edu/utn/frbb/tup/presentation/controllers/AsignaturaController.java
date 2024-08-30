@@ -24,7 +24,7 @@ public class AsignaturaController {
 
    
     @PostMapping
-    public ResponseEntity<Asignatura> darDeAltaAsignatura(@RequestBody AsignaturaDto asignaturadto) throws AsignaturaAlreadyExistsException{
+    public ResponseEntity<Asignatura> darDeAltaAsignatura(@RequestBody AsignaturaDto asignaturadto) throws AsignaturaAlreadyExistsException, MateriaNoEncontradaException, AlumnoNoEncontradoException{
         asignaturaValidator.validarAsignatura(asignaturadto);
         return new ResponseEntity<>(asignaturaService.crearAsignatura(asignaturadto), HttpStatus.CREATED);
     }
