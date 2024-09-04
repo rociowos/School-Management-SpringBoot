@@ -14,20 +14,29 @@ public class MateriaValidator {
             throw new IllegalArgumentException("El nombre de la materia es obligatorio");
         }
 
-        //profesor id
 
         if (materiadto.getAnio() == null || Integer.parseInt(materiadto.getAnio()) == 0) {
             throw new IllegalArgumentException("El año no puede ser nulo");
             
         }
 
+        if (Integer.parseInt(materiadto.getAnio()) < 0) {
+            throw new IllegalArgumentException("El año no puede ser negativo");
+            
+        }
+
+
         if (materiadto.getCuatrimestre() == null || Integer.parseInt(materiadto.getCuatrimestre()) == 0) {
             throw new IllegalArgumentException("El cuatrimestre no puede ser nulo");
             
         }
 
-        //correlatividades
+        if (Integer.parseInt(materiadto.getCuatrimestre()) < 0) {
+            throw new IllegalArgumentException("El cuatrimestre no puede ser negativo");
+            
+        }
 
+        
     }
 
     private void validarAnio(String anio) {
