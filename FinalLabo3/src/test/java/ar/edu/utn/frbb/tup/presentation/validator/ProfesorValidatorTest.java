@@ -22,8 +22,8 @@ public class ProfesorValidatorTest {
     @Test
     public void testProfesorValidatorSuccess(){
         ProfesorDto profesordto = new ProfesorDto();
-        profesordto.setNombre("Juan");
-        profesordto.setApellido("Perez");
+        profesordto.setNombre("Marta");
+        profesordto.setApellido("Martinez");
         profesordto.setTitulo("Matematico");
         profesordto.setnombreMateria("Matematica");
         assertDoesNotThrow(() -> profesorValidator.validarProfesor(profesordto));
@@ -34,7 +34,7 @@ public class ProfesorValidatorTest {
     public void testProfesorValidatorSinNombre(){
         ProfesorDto profesordto = new ProfesorDto();
         profesordto.setNombre("");
-        profesordto.setApellido("Perez");
+        profesordto.setApellido("Martinez");
         profesordto.setTitulo("Matematico");
         profesordto.setnombreMateria("Matematica");
         assertThrows(IllegalArgumentException.class,(() -> profesorValidator.validarProfesor(profesordto)));
@@ -44,7 +44,7 @@ public class ProfesorValidatorTest {
     @Test
     public void testProfesorValidatorSinApellido(){
         ProfesorDto profesordto = new ProfesorDto();
-        profesordto.setNombre("Juan");
+        profesordto.setNombre("Marta");
         profesordto.setApellido("");
         profesordto.setTitulo("Matematico");
         profesordto.setnombreMateria("Matematica");
@@ -55,8 +55,8 @@ public class ProfesorValidatorTest {
     @Test
     public void testProfesorValidatorSinTitulo(){
         ProfesorDto profesordto = new ProfesorDto();
-        profesordto.setNombre("Juan");
-        profesordto.setApellido("Perez");
+        profesordto.setNombre("Marta");
+        profesordto.setApellido("Martinez");
         profesordto.setTitulo("");
         profesordto.setnombreMateria("Matematica");
         assertThrows(IllegalArgumentException.class,(() -> profesorValidator.validarProfesor(profesordto)));
@@ -66,8 +66,8 @@ public class ProfesorValidatorTest {
     @Test
     public void testProfesorValidatorSinMateria(){
         ProfesorDto profesordto = new ProfesorDto();
-        profesordto.setNombre("Juan");
-        profesordto.setApellido("Perez");
+        profesordto.setNombre("Marta");
+        profesordto.setApellido("Martinez");
         profesordto.setTitulo("Matematico");
         profesordto.setnombreMateria("");
         assertThrows(IllegalArgumentException.class,(() -> profesorValidator.validarProfesor(profesordto)));

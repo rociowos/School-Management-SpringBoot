@@ -23,8 +23,8 @@ public class AlumnoValidatorTest {
     public void testAlumnoValidatorSuccess(){
         AlumnoDto alumnodto = new AlumnoDto();
         alumnodto.setDni("12345678");
-        alumnodto.setNombre("Juan");
-        alumnodto.setApellido("Perez");
+        alumnodto.setNombre("Jorge");
+        alumnodto.setApellido("Lopez");
 
         assertDoesNotThrow(() -> alumnoValidator.validarAlumno(alumnodto));
     }
@@ -33,8 +33,8 @@ public class AlumnoValidatorTest {
     public void testAlumnoValidatorErrorDni(){
         AlumnoDto alumnodto = new AlumnoDto();
         alumnodto.setDni("J");
-        alumnodto.setNombre("Juan");
-        alumnodto.setApellido("Perez");
+        alumnodto.setNombre("Jorge");
+        alumnodto.setApellido("Lopez");
     
         assertThrows(IllegalArgumentException.class, () -> alumnoValidator.validarAlumno(alumnodto));
     }
@@ -43,8 +43,8 @@ public class AlumnoValidatorTest {
     public void testAlumnoValidatorSinDni(){
         AlumnoDto alumnodto = new AlumnoDto();
         //alumnoDto.setDni("12345678");
-        alumnodto.setNombre("Juan");
-        alumnodto.setApellido("Perez");
+        alumnodto.setNombre("Jorge");
+        alumnodto.setApellido("Lopez");
 
         assertThrows(IllegalArgumentException.class, () -> alumnoValidator.validarAlumno(alumnodto));
     }
@@ -53,8 +53,8 @@ public class AlumnoValidatorTest {
     public void testAlumnoValidatorDniCeroOMenos(){
         AlumnoDto alumnodto = new AlumnoDto();
         alumnodto.setDni("-12345678");
-        alumnodto.setNombre("Juan");
-        alumnodto.setApellido("Perez");
+        alumnodto.setNombre("Jorge");
+        alumnodto.setApellido("Lopez");
 
     
         assertThrows(IllegalArgumentException.class, () -> alumnoValidator.validarAlumno(alumnodto));
@@ -65,7 +65,7 @@ public class AlumnoValidatorTest {
         AlumnoDto alumnodto = new AlumnoDto();
         alumnodto.setDni("12345678");
         alumnodto.setNombre("");
-        alumnodto.setApellido("Perez");
+        alumnodto.setApellido("Lopez");
 
         assertThrows(IllegalArgumentException.class, () -> alumnoValidator.validarAlumno(alumnodto));
     }
@@ -74,7 +74,7 @@ public class AlumnoValidatorTest {
     public void testAlumnoValidatorSinApellido(){
         AlumnoDto alumnodto = new AlumnoDto();
         alumnodto.setDni("12345678");
-        alumnodto.setNombre("Juan");
+        alumnodto.setNombre("Jorge");
         alumnodto.setApellido("");
         assertThrows(IllegalArgumentException.class, () -> alumnoValidator.validarAlumno(alumnodto));
     

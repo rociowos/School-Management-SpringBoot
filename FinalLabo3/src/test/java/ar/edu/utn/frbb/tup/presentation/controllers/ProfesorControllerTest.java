@@ -181,8 +181,8 @@ public class ProfesorControllerTest {
     public Profesor getProfesor() {
         Profesor profesor = new Profesor();
         profesor.setId(1234);
-        profesor.setNombre("Juan");
-        profesor.setApellido("Perez");
+        profesor.setNombre("Marta");
+        profesor.setApellido("Martinez");
         profesor.setTitulo("Matematico");
         profesor.setNombreMateria("Matematica");
         return profesor;
@@ -190,8 +190,8 @@ public class ProfesorControllerTest {
 
     public ProfesorDto getProfesorDto() {
         ProfesorDto profesordto = new ProfesorDto();
-        profesordto.setNombre("Juan");
-        profesordto.setApellido("Perez");
+        profesordto.setNombre("Marta");
+        profesordto.setApellido("Martinez");
         profesordto.setTitulo("Matematico");
         profesordto.setnombreMateria("Matematica");
         return profesordto;

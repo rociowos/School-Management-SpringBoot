@@ -182,16 +182,16 @@ public class AlumnoControllerTest {
         Alumno alumno = new Alumno();
         alumno.setId(1213);
         alumno.setDni(12345678);
-        alumno.setNombre("Juan");
-        alumno.setApellido("Perez");
+        alumno.setNombre("Jorge");
+        alumno.setApellido("Lopez");
         return alumno;
     }
 
     public AlumnoDto getAlumnoDto() {
         AlumnoDto alumnodto = new AlumnoDto();
         alumnodto.setDni("12345678");
-        alumnodto.setNombre("Juan");
-        alumnodto.setApellido("Perez");
+        alumnodto.setNombre("Jorge");
+        alumnodto.setApellido("Lopez");
         return alumnodto;
     }
 }
