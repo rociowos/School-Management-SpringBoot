@@ -77,8 +77,7 @@ public class MateriaService {
 
 
     public List<Materia> mostrarMateriasPorProfesor(long profesorid) throws MateriaNoEncontradaException, FileNotFoundException, IOException {
-    List<Materia> todasLasMaterias = materiaDao.mostrarTodasLasMaterias(); // Obtenemos todas las materias
-
+    List<Materia> todasLasMaterias = materiaDao.mostrarTodasLasMaterias(); 
     // Filtramos las materias por el ID del profesor
     List<Materia> materiasFiltradas = todasLasMaterias.stream()
             .filter(materia -> materia.getProfesorid() == profesorid)
@@ -89,7 +88,7 @@ public class MateriaService {
         throw new MateriaNoEncontradaException("No se encontraron materias para el profesor con ID: " + profesorid);
     }
 
-    return materiasFiltradas; // Retornamos la lista filtrada y ordenada
+    return materiasFiltradas; 
 }
 
 }

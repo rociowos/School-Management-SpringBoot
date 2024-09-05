@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,16 +25,22 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ar.edu.utn.frbb.tup.exceptions.AlumnoNoEncontradoException;
 import ar.edu.utn.frbb.tup.exceptions.AsignaturaAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.AsignaturaNoEncontradaException;
+import ar.edu.utn.frbb.tup.exceptions.MateriaAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.MateriaNoEncontradaException;
+import ar.edu.utn.frbb.tup.exceptions.ProfesorNoEncontradoException;
+import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Asignatura;
 import ar.edu.utn.frbb.tup.model.Materia;
+import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
 import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
 import ar.edu.utn.frbb.tup.persistence.CarreraDao;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.ProfesorDao;
-
+import ar.edu.utn.frbb.tup.presentation.modelDto.AlumnoDto;
 import ar.edu.utn.frbb.tup.presentation.modelDto.AsignaturaDto;
+import ar.edu.utn.frbb.tup.presentation.modelDto.MateriaDto;
+import ar.edu.utn.frbb.tup.presentation.modelDto.ProfesorDto;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -62,6 +68,31 @@ public class AsignaturaServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
+    }
+
+
+    @Test
+    public void testDarDeAltaMateriaSuccess() throws MateriaAlreadyExistsException, ProfesorNoEncontradoException, AsignaturaAlreadyExistsException, MateriaNoEncontradaException, AlumnoNoEncontradoException{
+        AsignaturaDto asignaturaDto = getAsignaturaDto();
+        Asignatura asignatura = new Asignatura(asignaturaDto);
+        
+        MateriaDto materiaDto = getMateriaDto();
+        Materia materia = new Materia(materiaDto);
+        AlumnoDto alumnoDto = getAlumnoDto();
+        Alumno alumno = new Alumno(alumnoDto);
+        
+        
+        when(asignaturaDao.findByAsignaturaId(anyLong())).thenReturn(null);
+        when (materiaDao.findById(anyLong())).thenReturn(materia);
+        when (alumnoDao.findById(anyLong())).thenReturn(alumno);
+
+        Asignatura asignaturaCreada =  asignaturaService.crearAsignatura(asignaturaDto);
+        
+
+        verify(asignaturaDao, times(1)).findByAsignaturaId(anyLong());
+        verify(asignaturaDao, times(1)).crearAsignatura(any(Asignatura.class));
+
+        assertNotNull(asignaturaCreada);
     }
 
    
@@ -173,5 +204,23 @@ public class AsignaturaServiceTest {
         asignaturadto.setNota("7");
         asignaturadto.setAlumnoid("1234");
         return asignaturadto;
+    }
+
+    public MateriaDto getMateriaDto() {
+        MateriaDto materiadto = new MateriaDto();
+        materiadto.setNombre("Matematica 2");
+        materiadto.setProfesorid("5555");
+        materiadto.setAnio("2");
+        materiadto.setCuatrimestre("1");
+        materiadto.setCorrelatividades(null);
+        return materiadto;
+    }
+
+    public AlumnoDto getAlumnoDto() {
+        AlumnoDto alumnodto = new AlumnoDto();
+        alumnodto.setDni("12345678");
+        alumnodto.setNombre("Jorge");
+        alumnodto.setApellido("Lopez");
+        return alumnodto;
     }
 }

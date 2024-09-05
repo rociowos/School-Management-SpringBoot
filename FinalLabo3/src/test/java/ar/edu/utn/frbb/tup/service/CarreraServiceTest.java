@@ -24,17 +24,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import ar.edu.utn.frbb.tup.exceptions.AlumnoAlreadyExistsException;
-import ar.edu.utn.frbb.tup.exceptions.AlumnoNoEncontradoException;
 import ar.edu.utn.frbb.tup.exceptions.CarreraAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.CarreraNoEncontradaException;
-import ar.edu.utn.frbb.tup.model.Alumno;
+
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
 import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
 import ar.edu.utn.frbb.tup.persistence.CarreraDao;
 import ar.edu.utn.frbb.tup.persistence.ProfesorDao;
-import ar.edu.utn.frbb.tup.presentation.modelDto.AlumnoDto;
+
 import ar.edu.utn.frbb.tup.presentation.modelDto.CarreraDto;
 
 @ExtendWith(MockitoExtension.class)
