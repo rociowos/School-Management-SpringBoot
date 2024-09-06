@@ -45,7 +45,7 @@ public class ProfesorDao {
     }
 
 
-    public Profesor findById(long id) {
+    public Profesor BuscarId(long id) {
         try (BufferedReader lector = new BufferedReader(new FileReader(PROFESORTXT))) {
             String linea;
             lector.readLine(); 

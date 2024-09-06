@@ -53,7 +53,7 @@ public class MateriaDao {
 
 
 
-    public Materia findById(long idmateria) {
+    public Materia BuscarId(long idmateria) {
         try (BufferedReader lector = new BufferedReader(new FileReader(MATERIATXT))) {
             String linea;
             lector.readLine(); 
@@ -142,7 +142,11 @@ public class MateriaDao {
                     campos[2] = String.valueOf(materia.getProfesorid());
                     campos[3] = String.valueOf(materia.getAnio());
                     campos[4] = String.valueOf(materia.getCuatrimestre());
-                    campos[5] = String.valueOf(materia.getCorrelatividades()); //pasa string hay que pasar lista corregir
+                    campos[5] = materia.getCorrelatividades().stream()
+                                    .map(String::valueOf)
+                                    .collect(Collectors.joining(","));
+
+                    //campos[5] = String.valueOf(materia.getCorrelatividades()); 
                     nuevosDatos.add(String.join(",", campos));
                 } else {
                     nuevosDatos.add(linea);
@@ -153,7 +157,7 @@ public class MateriaDao {
         }
     
         if (!materiaEncontrado) {
-            throw new MateriaNoEncontradaException("Materia no encontrado con ID: " + materia.getIdmateria());
+            throw new MateriaNoEncontradaException("Materia no encontrada con ID: " + materia.getIdmateria());
         }
     
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(MATERIATXT))) {

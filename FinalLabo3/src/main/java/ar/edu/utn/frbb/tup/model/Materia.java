@@ -60,17 +60,6 @@ public class Materia {
         this.correlatividades = correlatividades;
     }
 
-    //public Materia(){}
-
-   /*  public Materia(String nombre, long profesorid, long anio, long cuatrimestre, List<Long>correlatividades ) {
-        this.nombre = nombre;
-        this.profesorid = profesorid;
-        this.anio = anio;
-        this.cuatrimestre = cuatrimestre;
-        this.correlatividades = correlatividades; 
-        
-
-    }*/
 
     
     public Materia(){

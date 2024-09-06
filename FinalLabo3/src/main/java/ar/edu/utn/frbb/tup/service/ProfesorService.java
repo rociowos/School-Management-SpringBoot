@@ -22,7 +22,7 @@ public class ProfesorService {
 
     public Profesor crearProfesor(ProfesorDto profesordto) throws ProfesorAlreadyExistsException{
         Profesor profesor = new Profesor(profesordto);
-        Profesor profesorExistente = profesorDao.findById(profesor.getId());
+        Profesor profesorExistente = profesorDao.BuscarId(profesor.getId());
         if (profesorExistente != null){
             throw new ProfesorAlreadyExistsException("El profesor con ese ID ya existe");
         }
@@ -31,7 +31,7 @@ public class ProfesorService {
     }
 
     public Profesor borrarProfesor(long id) throws ProfesorNoEncontradoException {
-        Profesor profesorExistente = profesorDao.findById(id);
+        Profesor profesorExistente = profesorDao.BuscarId(id);
         if (profesorExistente == null) {
             throw new ProfesorNoEncontradoException("No se encontró un profesor con el ID proporcionado");
         }
@@ -41,7 +41,7 @@ public class ProfesorService {
 
     public Profesor modificarProfesor(long id, ProfesorDto profesordto) throws ProfesorNoEncontradoException {
         
-       Profesor profesorExistente = profesorDao.findById(id);
+       Profesor profesorExistente = profesorDao.BuscarId(id);
         if (profesorExistente == null) {
             throw new ProfesorNoEncontradoException("El profesor con el ID " + id + " no fue encontrado.");
         }

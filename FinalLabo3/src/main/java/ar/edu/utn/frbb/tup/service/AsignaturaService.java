@@ -33,7 +33,7 @@ public class AsignaturaService {
         if (asignaturaExistente != null){
             throw new AsignaturaAlreadyExistsException("La asignatura con ese ID ya existe");
         }
-        if (materiaDao.findById(asignatura.getIdmateria()) == null){
+        if (materiaDao.BuscarId(asignatura.getIdmateria()) == null){
             throw new MateriaNoEncontradaException("La materia con ese ID no se encontro");
         }
 

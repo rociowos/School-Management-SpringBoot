@@ -1,7 +1,8 @@
 idmateria,nombre,profesorid,anio,cuatrimestre,correlatividades 
-9888,Matematicaaa,1470,3,2,1, 2
 7231,Matematica,1470,3,2,1-2
 3422,Matematica,1470,3,2,1-2
 2013,Laboratorio,2545,3,2,1-2
 5397,Ingles,2545,3,2,1-2
 9634,Frances,2545,3,2,1-2
+7132,Ingles,2897,3,2,1-2
+7394,Ingles 4,2897,3,2,1-2

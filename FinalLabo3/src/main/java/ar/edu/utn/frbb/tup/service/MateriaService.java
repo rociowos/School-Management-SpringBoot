@@ -30,11 +30,11 @@ public class MateriaService {
 
     public Materia crearMateria(MateriaDto materiadto) throws MateriaAlreadyExistsException, ProfesorNoEncontradoException{
         Materia materia = new Materia(materiadto);
-        Materia materiaExistente = materiaDao.findById(materia.getIdmateria());
+        Materia materiaExistente = materiaDao.BuscarId(materia.getIdmateria());
         if (materiaExistente != null){
             throw new MateriaAlreadyExistsException("La materia con ese ID ya existe");
         }
-        if (profesorDao.findById(materia.getProfesorid()) == null){ 
+        if (profesorDao.BuscarId(materia.getProfesorid()) == null){ 
             throw new ProfesorNoEncontradoException ("No se encontro el profesor con el ID proporcionado");
         }
         materiaDao.crearMateria(materia);
@@ -42,7 +42,7 @@ public class MateriaService {
     }
 
     public Materia borrarMateria(long idmateria) throws MateriaNoEncontradaException {
-        Materia materiaExistente = materiaDao.findById(idmateria);
+        Materia materiaExistente = materiaDao.BuscarId(idmateria);
         if (materiaExistente == null) {
             throw new MateriaNoEncontradaException("No se encontró una materia con el ID proporcionado");
         }

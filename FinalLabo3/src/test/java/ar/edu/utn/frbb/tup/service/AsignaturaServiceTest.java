@@ -83,7 +83,7 @@ public class AsignaturaServiceTest {
         
         
         when(asignaturaDao.BuscarAsignaturaId(anyLong())).thenReturn(null);
-        when (materiaDao.findById(anyLong())).thenReturn(materia);
+        when (materiaDao.BuscarId(anyLong())).thenReturn(materia);
         when (alumnoDao.BuscarId(anyLong())).thenReturn(alumno);
 
         Asignatura asignaturaCreada =  asignaturaService.crearAsignatura(asignaturaDto);

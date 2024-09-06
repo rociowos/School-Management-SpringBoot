@@ -73,11 +73,11 @@ public class ProfesorServiceTest {
         Profesor profesor = new Profesor(profesorDto);
     
     
-        when(profesorDao.findById(anyLong())).thenReturn(null);
+        when(profesorDao.BuscarId(anyLong())).thenReturn(null);
 
         Profesor profesorCreado = ProfesorService.crearProfesor(profesorDto);
 
-        verify(profesorDao, times(1)).findById(anyLong()); 
+        verify(profesorDao, times(1)).BuscarId(anyLong()); 
         verify(profesorDao, times(1)).crearProfesor(any(Profesor.class));
 
         assertNotNull(profesorCreado);
@@ -88,11 +88,11 @@ public class ProfesorServiceTest {
         ProfesorDto profesorDto = getProfesorDto();
         Profesor profesor = new Profesor(profesorDto);
         
-        when(profesorDao.findById(anyLong())).thenReturn(profesor);
+        when(profesorDao.BuscarId(anyLong())).thenReturn(profesor);
 
         assertThrows(ProfesorAlreadyExistsException.class, () -> ProfesorService.crearProfesor(profesorDto));
 
-        verify(profesorDao, times(1)).findById(anyLong());
+        verify(profesorDao, times(1)).BuscarId(anyLong());
         verify(profesorDao, times(0)).crearProfesor(any(Profesor.class));
     }
 
@@ -102,7 +102,7 @@ public class ProfesorServiceTest {
         Profesor profesor = new Profesor(profesorDto);
 
         ProfesorDao profesorDaoMock = mock(ProfesorDao.class);
-        when(profesorDaoMock.findById(profesor.getId())).thenReturn(profesor);
+        when(profesorDaoMock.BuscarId(profesor.getId())).thenReturn(profesor);
     
         ProfesorService profesorService = new ProfesorService();
         ReflectionTestUtils.setField(profesorService, "profesorDao", profesorDaoMock);
@@ -122,7 +122,7 @@ public class ProfesorServiceTest {
         Profesor profesor = new Profesor(profesorDto);
     
         ProfesorDao profesorDaoMock = mock(ProfesorDao.class);
-        Mockito.when(profesorDaoMock.findById(profesor.getId())).thenReturn(null);
+        Mockito.when(profesorDaoMock.BuscarId(profesor.getId())).thenReturn(null);
     
         ProfesorService profesorService = new ProfesorService();
         ReflectionTestUtils.setField(profesorService, "profesorDao", profesorDaoMock);

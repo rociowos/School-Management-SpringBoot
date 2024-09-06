@@ -74,13 +74,13 @@ public class MateriaServiceTest {
         Profesor profesor = new Profesor(profesorDto);
         
         
-        when(materiaDao.findById(anyLong())).thenReturn(null);
-        when (profesorDao.findById(anyLong())).thenReturn(profesor);
+        when(materiaDao.BuscarId(anyLong())).thenReturn(null);
+        when (profesorDao.BuscarId(anyLong())).thenReturn(profesor);
 
         Materia materiaCreada =  materiaService.crearMateria(materiaDto);
         
 
-        verify(materiaDao, times(1)).findById(anyLong());
+        verify(materiaDao, times(1)).BuscarId(anyLong());
         verify(materiaDao, times(1)).crearMateria(any(Materia.class));
 
         assertNotNull(materiaCreada);
@@ -93,11 +93,11 @@ public class MateriaServiceTest {
         Materia materia = new Materia(materiaDto);
         
         
-        when(materiaDao.findById(anyLong())).thenReturn(materia);
+        when(materiaDao.BuscarId(anyLong())).thenReturn(materia);
 
         assertThrows(MateriaAlreadyExistsException.class, () -> materiaService.crearMateria(materiaDto));
 
-        verify(materiaDao, times(1)).findById(anyLong());
+        verify(materiaDao, times(1)).BuscarId(anyLong());
         verify(materiaDao, times(0)).crearMateria(any(Materia.class));
     }
 
@@ -109,7 +109,7 @@ public class MateriaServiceTest {
         
 
         MateriaDao materiaDaoMock = mock(MateriaDao.class);
-        when(materiaDaoMock.findById(anyLong())).thenReturn(materia);
+        when(materiaDaoMock.BuscarId(anyLong())).thenReturn(materia);
     
         MateriaService materiaService = new MateriaService();
         ReflectionTestUtils.setField(materiaService, "materiaDao", materiaDaoMock);
@@ -128,7 +128,7 @@ public class MateriaServiceTest {
         Materia materia = new Materia(materiaDto);
 
         MateriaDao materiaDaoMock = mock(MateriaDao.class);
-        when(materiaDaoMock.findById(anyLong())).thenReturn(null);
+        when(materiaDaoMock.BuscarId(anyLong())).thenReturn(null);
     
         MateriaService materiaService = new MateriaService();
         ReflectionTestUtils.setField(materiaService, "materiaDao", materiaDaoMock);

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class TupResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value
-            = {AlumnoAlreadyExistsException.class, ProfesorAlreadyExistsException.class, IllegalArgumentException.class})
+            = {AlumnoAlreadyExistsException.class, ProfesorAlreadyExistsException.class, IllegalArgumentException.class, CarreraAlreadyExistsException.class})
     protected ResponseEntity<Object> handleBadRequest(
             Exception ex, WebRequest request) {
         String exceptionMessage = ex.getMessage();
@@ -27,7 +27,7 @@ public class TupResponseEntityExceptionHandler extends ResponseEntityExceptionHa
     }
 
     @ExceptionHandler(value
-            = {AlumnoNoEncontradoException.class, ProfesorNoEncontradoException.class, MateriaNoEncontradaException.class})
+            = {AlumnoNoEncontradoException.class, ProfesorNoEncontradoException.class, MateriaNoEncontradaException.class, CarreraNoEncontradaException.class})
     protected ResponseEntity<Object> handleMateriaNotFound(
             Exception ex, WebRequest request) {
         String exceptionMessage = ex.getMessage();
