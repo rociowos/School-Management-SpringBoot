@@ -44,7 +44,7 @@ public class AlumnoDao {
 
     }
 
-    public Alumno findByDni(long dni) {
+    public Alumno BuscarDni(long dni) {
         try (BufferedReader lector = new BufferedReader(new FileReader(ALUMNOTXT))) {
             String linea;
             lector.readLine();
@@ -65,7 +65,7 @@ public class AlumnoDao {
         return null;
     }
 
-    public Alumno findById(long id) {
+    public Alumno BuscarId(long id) {
         try (BufferedReader lector = new BufferedReader(new FileReader(ALUMNOTXT))) {
             String linea;
             lector.readLine(); // Leer la cabecera

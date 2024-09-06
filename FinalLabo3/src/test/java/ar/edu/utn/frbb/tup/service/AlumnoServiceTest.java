@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -68,11 +67,11 @@ public class AlumnoServiceTest {
         AlumnoDto alumnoDto = getAlumnoDto();
         Alumno alumno = new Alumno(alumnoDto);
         
-        when(alumnoDao.findByDni(alumno.getDni())).thenReturn(null);
+        when(alumnoDao.BuscarDni(alumno.getDni())).thenReturn(null);
 
         Alumno alumnoCreado =  alumnoService.crearAlumno(alumnoDto);
 
-        verify(alumnoDao, times(1)).findByDni(alumno.getDni());
+        verify(alumnoDao, times(1)).BuscarDni(alumno.getDni());
         verify(alumnoDao, times(1)).crearAlumno(any(Alumno.class));
 
         assertNotNull(alumnoCreado);
@@ -83,11 +82,11 @@ public class AlumnoServiceTest {
         AlumnoDto alumnoDto = getAlumnoDto();
         Alumno alumno = new Alumno(alumnoDto);
         
-        when(alumnoDao.findByDni(alumno.getDni())).thenReturn(alumno);
+        when(alumnoDao.BuscarDni(alumno.getDni())).thenReturn(alumno);
 
         assertThrows(AlumnoAlreadyExistsException.class, () -> alumnoService.crearAlumno(alumnoDto));
 
-        verify(alumnoDao, times(1)).findByDni(alumno.getDni());
+        verify(alumnoDao, times(1)).BuscarDni(alumno.getDni());
         verify(alumnoDao, times(0)).crearAlumno(any(Alumno.class));
     }
  
@@ -98,7 +97,7 @@ public class AlumnoServiceTest {
         Alumno alumno = new Alumno(alumnoDto);
 
         AlumnoDao alumnoDaoMock = mock(AlumnoDao.class);
-        when(alumnoDaoMock.findByDni(alumno.getDni())).thenReturn(alumno);
+        when(alumnoDaoMock.BuscarDni(alumno.getDni())).thenReturn(alumno);
     
         AlumnoService alumnoService = new AlumnoService();
         ReflectionTestUtils.setField(alumnoService, "alumnoDao", alumnoDaoMock);
@@ -117,7 +116,7 @@ public class AlumnoServiceTest {
         Alumno alumno = new Alumno(alumnoDto);
     
         AlumnoDao alumnoDaoMock = Mockito.mock(AlumnoDao.class);
-        Mockito.when(alumnoDaoMock.findByDni(alumno.getDni())).thenReturn(null);
+        Mockito.when(alumnoDaoMock.BuscarDni(alumno.getDni())).thenReturn(null);
     
         AlumnoService alumnoService = new AlumnoService();
         ReflectionTestUtils.setField(alumnoService, "alumnoDao", alumnoDaoMock);

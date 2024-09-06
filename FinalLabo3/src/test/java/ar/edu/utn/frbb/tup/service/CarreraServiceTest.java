@@ -66,11 +66,11 @@ public class CarreraServiceTest {
         CarreraDto carreraDto = getCarreraDto();
         Carrera carrera = new Carrera(carreraDto);
         
-        when(carreraDao.findByCarrera(carrera.getNombre())).thenReturn(null);
+        when(carreraDao.BuscarCarrera(carrera.getNombre())).thenReturn(null);
 
         Carrera carreraCreada =  CarreraService.crearCarrera(carreraDto);
 
-        verify(carreraDao, times(1)).findByCarrera(carrera.getNombre());
+        verify(carreraDao, times(1)).BuscarCarrera(carrera.getNombre());
         verify(carreraDao, times(1)).crearCarrera(any(Carrera.class));
 
         assertNotNull(carreraCreada);
@@ -83,11 +83,11 @@ public class CarreraServiceTest {
         Carrera carrera = new Carrera(carreraDto);
         
         
-        when(carreraDao.findByCarrera(carrera.getNombre())).thenReturn(carrera);
+        when(carreraDao.BuscarCarrera(carrera.getNombre())).thenReturn(carrera);
 
         assertThrows(CarreraAlreadyExistsException.class, () -> CarreraService.crearCarrera(carreraDto));
 
-        verify(carreraDao, times(1)).findByCarrera(carrera.getNombre());
+        verify(carreraDao, times(1)).BuscarCarrera(carrera.getNombre());
         verify(carreraDao, times(0)).crearCarrera(any(Carrera.class));
     }
 
@@ -98,7 +98,7 @@ public class CarreraServiceTest {
         Carrera carrera = new Carrera(carreraDto);
 
         CarreraDao carreraDaoMock = mock(CarreraDao.class);
-        when(carreraDaoMock.findByCarrera(carrera.getNombre())).thenReturn(carrera);
+        when(carreraDaoMock.BuscarCarrera(carrera.getNombre())).thenReturn(carrera);
     
         CarreraService carreraService = new CarreraService();
         ReflectionTestUtils.setField(carreraService, "carreraDao", carreraDaoMock);
@@ -117,7 +117,7 @@ public class CarreraServiceTest {
         Carrera carrera = new Carrera(carreraDto);
     
         CarreraDao carreraDaoMock = mock(CarreraDao.class);
-        when(carreraDaoMock.findByCarrera(carrera.getNombre())).thenReturn(null);
+        when(carreraDaoMock.BuscarCarrera(carrera.getNombre())).thenReturn(null);
     
         CarreraService carreraService = new CarreraService();
         ReflectionTestUtils.setField(carreraService, "carreraDao", carreraDaoMock);

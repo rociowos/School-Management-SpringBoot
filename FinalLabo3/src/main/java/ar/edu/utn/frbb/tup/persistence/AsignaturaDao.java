@@ -44,7 +44,7 @@ public class AsignaturaDao {
 
     }
 
-    public Asignatura findByAsignaturaId(long asignaturaId) {
+    public Asignatura BuscarAsignaturaId(long asignaturaId) {
         try (BufferedReader lector = new BufferedReader(new FileReader(ASIGNATURATXT))) {
             String linea;
             lector.readLine(); 

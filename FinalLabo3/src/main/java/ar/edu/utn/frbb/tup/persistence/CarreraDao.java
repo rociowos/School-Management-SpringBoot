@@ -41,7 +41,7 @@ public class CarreraDao {
                 
     }
 
-    public Carrera findByCarrera(String nombre) {
+    public Carrera BuscarCarrera(String nombre) {
         try (BufferedReader lector = new BufferedReader(new FileReader(CARRERATXT))) {
             String linea;
             lector.readLine();

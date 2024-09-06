@@ -29,7 +29,7 @@ public class AsignaturaService {
     
     public Asignatura crearAsignatura(AsignaturaDto asignaturadto) throws AsignaturaAlreadyExistsException, MateriaNoEncontradaException, AlumnoNoEncontradoException{
         Asignatura asignatura= new Asignatura(asignaturadto);
-        Asignatura asignaturaExistente = asignaturaDao.findByAsignaturaId(asignatura.getAsignaturaId());
+        Asignatura asignaturaExistente = asignaturaDao.BuscarAsignaturaId(asignatura.getAsignaturaId());
         if (asignaturaExistente != null){
             throw new AsignaturaAlreadyExistsException("La asignatura con ese ID ya existe");
         }
@@ -37,7 +37,7 @@ public class AsignaturaService {
             throw new MateriaNoEncontradaException("La materia con ese ID no se encontro");
         }
 
-        if (alumnoDao.findById(asignatura.getAlumnoid()) == null) {
+        if (alumnoDao.BuscarId(asignatura.getAlumnoid()) == null) {
             throw new AlumnoNoEncontradoException("No se encontro un alumno con ese ID");
         }
         asignaturaDao.crearAsignatura(asignatura);
@@ -45,7 +45,7 @@ public class AsignaturaService {
     }
 
     public Asignatura borrarAsignatura(long asignaturaId) throws AsignaturaNoEncontradaException {
-        Asignatura asignaturaExistente = asignaturaDao.findByAsignaturaId(asignaturaId);
+        Asignatura asignaturaExistente = asignaturaDao.BuscarAsignaturaId(asignaturaId);
         if (asignaturaExistente == null) {
             throw new AsignaturaNoEncontradaException("No se encontró una asignatura con el ID proporcionado");
         }

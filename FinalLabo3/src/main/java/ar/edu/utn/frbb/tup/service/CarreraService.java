@@ -23,7 +23,7 @@ public class CarreraService {
 
     public Carrera crearCarrera(CarreraDto carreradto) throws CarreraAlreadyExistsException{
         Carrera carrera = new Carrera(carreradto);
-        Carrera carreraExistente = carreraDao.findByCarrera(carrera.getNombre());
+        Carrera carreraExistente = carreraDao.BuscarCarrera(carrera.getNombre());
         if (carreraExistente != null){
             throw new CarreraAlreadyExistsException("La carrera con ese nombre ya existe");
         }
@@ -32,7 +32,7 @@ public class CarreraService {
     }
 
     public Carrera borrarCarrera(String nombre) throws CarreraNoEncontradaException {
-        Carrera carreraExistente = carreraDao.findByCarrera(nombre);
+        Carrera carreraExistente = carreraDao.BuscarCarrera(nombre);
         if (carreraExistente == null) {
             throw new CarreraNoEncontradaException("No se encontró una carrera con ese nombre");
         }

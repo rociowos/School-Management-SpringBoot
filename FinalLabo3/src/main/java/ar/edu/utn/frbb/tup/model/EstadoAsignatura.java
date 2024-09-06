@@ -18,6 +18,6 @@ public enum EstadoAsignatura {
                 return tipo;
             }
         }
-        throw new IllegalArgumentException("No se pudo encontrar un TipoMoneda con la descripción: " + text);
+        throw new IllegalArgumentException("No se pudo encontrar un Estado con la descripción: " + text);
     }
 }

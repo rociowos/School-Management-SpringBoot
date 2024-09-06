@@ -1,5 +1,6 @@
 id,dni,nombre,apellido
-3565,4412345,jorge,lopez
-3587,44661663,jorge,cerda
-4410,44115768,urielin,blanquin
-7531,44115756,a,aa
+7222,44115758,Jorge,Lopezzz
+7548,21739027,Soledad,Vallejo
+6929,44115755,Juana,Lopez
+6569,44115752,Juana,Martinez
+9810,44115756,Jorge,Gomez

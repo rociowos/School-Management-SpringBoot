@@ -1,4 +1,5 @@
 nombre,cantanios
-Arquitectura,5
 Tecnicatura en Programacion,2
+Arquitectura,5
 Abogacia,5
+Contador,5

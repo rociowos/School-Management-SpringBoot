@@ -31,7 +31,7 @@ import ar.edu.utn.frbb.tup.exceptions.ProfesorNoEncontradoException;
 import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Asignatura;
 import ar.edu.utn.frbb.tup.model.Materia;
-import ar.edu.utn.frbb.tup.model.Profesor;
+
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
 import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
 import ar.edu.utn.frbb.tup.persistence.CarreraDao;
@@ -40,7 +40,7 @@ import ar.edu.utn.frbb.tup.persistence.ProfesorDao;
 import ar.edu.utn.frbb.tup.presentation.modelDto.AlumnoDto;
 import ar.edu.utn.frbb.tup.presentation.modelDto.AsignaturaDto;
 import ar.edu.utn.frbb.tup.presentation.modelDto.MateriaDto;
-import ar.edu.utn.frbb.tup.presentation.modelDto.ProfesorDto;
+
 
 
 @ExtendWith(MockitoExtension.class)
@@ -82,14 +82,14 @@ public class AsignaturaServiceTest {
         Alumno alumno = new Alumno(alumnoDto);
         
         
-        when(asignaturaDao.findByAsignaturaId(anyLong())).thenReturn(null);
+        when(asignaturaDao.BuscarAsignaturaId(anyLong())).thenReturn(null);
         when (materiaDao.findById(anyLong())).thenReturn(materia);
-        when (alumnoDao.findById(anyLong())).thenReturn(alumno);
+        when (alumnoDao.BuscarId(anyLong())).thenReturn(alumno);
 
         Asignatura asignaturaCreada =  asignaturaService.crearAsignatura(asignaturaDto);
         
 
-        verify(asignaturaDao, times(1)).findByAsignaturaId(anyLong());
+        verify(asignaturaDao, times(1)).BuscarAsignaturaId(anyLong());
         verify(asignaturaDao, times(1)).crearAsignatura(any(Asignatura.class));
 
         assertNotNull(asignaturaCreada);
@@ -103,11 +103,11 @@ public class AsignaturaServiceTest {
         AsignaturaDto asignaturaDto = getAsignaturaDto();
         Asignatura asignatura= new Asignatura(asignaturaDto);
         
-        when(asignaturaDao.findByAsignaturaId(anyLong())).thenReturn(asignatura);
+        when(asignaturaDao.BuscarAsignaturaId(anyLong())).thenReturn(asignatura);
 
         assertThrows(AsignaturaAlreadyExistsException.class, () -> asignaturaService.crearAsignatura(asignaturaDto));
 
-        verify(asignaturaDao, times(1)).findByAsignaturaId(anyLong());
+        verify(asignaturaDao, times(1)).BuscarAsignaturaId(anyLong());
         verify(asignaturaDao, times(0)).crearAsignatura(any(Asignatura.class));
     }
 
@@ -119,7 +119,7 @@ public class AsignaturaServiceTest {
         Asignatura asignatura= new Asignatura(asignaturaDto);
 
         AsignaturaDao asignaturaDaoMock = mock(AsignaturaDao.class);
-        when(asignaturaDaoMock.findByAsignaturaId(asignatura.getAsignaturaId())).thenReturn(asignatura);
+        when(asignaturaDaoMock.BuscarAsignaturaId(asignatura.getAsignaturaId())).thenReturn(asignatura);
     
         AsignaturaService asignaturaService = new AsignaturaService();
         ReflectionTestUtils.setField(asignaturaService, "asignaturaDao", asignaturaDaoMock);
@@ -138,7 +138,7 @@ public class AsignaturaServiceTest {
         Asignatura asignatura= new Asignatura(asignaturaDto);
 
         AsignaturaDao asignaturaDaoMock = mock(AsignaturaDao.class);
-        Mockito.when(asignaturaDaoMock.findByAsignaturaId(asignatura.getAsignaturaId())).thenReturn(null);
+        Mockito.when(asignaturaDaoMock.BuscarAsignaturaId(asignatura.getAsignaturaId())).thenReturn(null);
     
         AsignaturaService asignaturaService = new AsignaturaService();
         ReflectionTestUtils.setField(asignaturaService, "asignaturaDao", asignaturaDaoMock);

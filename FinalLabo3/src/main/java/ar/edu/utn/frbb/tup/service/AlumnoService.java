@@ -23,7 +23,7 @@ public class AlumnoService {
 
     public Alumno crearAlumno(AlumnoDto alumnodto) throws AlumnoAlreadyExistsException{
         Alumno alumno = new Alumno(alumnodto);
-        Alumno alumnoExistente = alumnoDao.findByDni(alumno.getDni());
+        Alumno alumnoExistente = alumnoDao.BuscarDni(alumno.getDni());
         if (alumnoExistente != null){
             throw new AlumnoAlreadyExistsException("El alumno con ese DNI ya existe");
         }
@@ -32,7 +32,7 @@ public class AlumnoService {
     }
 
     public Alumno borrarAlumno(long dni) throws AlumnoNoEncontradoException {
-        Alumno alumnoExistente = alumnoDao.findByDni(dni);
+        Alumno alumnoExistente = alumnoDao.BuscarDni(dni);
         if (alumnoExistente == null) {
             throw new AlumnoNoEncontradoException("No se encontró un alumno con el DNI proporcionado");
         }
@@ -42,7 +42,7 @@ public class AlumnoService {
 
     public Alumno modificarAlumno(long id, AlumnoDto alumnodto) throws AlumnoNoEncontradoException {
         
-        Alumno alumnoExistente = alumnoDao.findById(id);
+        Alumno alumnoExistente = alumnoDao.BuscarId(id);
         if (alumnoExistente == null) {
             throw new AlumnoNoEncontradoException("El alumno con el ID " + id + " no fue encontrado.");
         }
