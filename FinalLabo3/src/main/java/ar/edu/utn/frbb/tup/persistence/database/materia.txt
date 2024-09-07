@@ -5,4 +5,4 @@ idmateria,nombre,profesorid,anio,cuatrimestre,correlatividades
 5397,Ingles,2545,3,2,1-2
 9634,Frances,2545,3,2,1-2
 7132,Ingles,2897,3,2,1-2
-7394,Ingles 4,2897,3,2,1-2
+7394,Ingles 5,2897,3,2,1,2

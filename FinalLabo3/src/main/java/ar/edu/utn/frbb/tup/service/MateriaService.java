@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import ar.edu.utn.frbb.tup.exceptions.MateriaAlreadyExistsException;
 import ar.edu.utn.frbb.tup.exceptions.MateriaNoEncontradaException;
 import ar.edu.utn.frbb.tup.exceptions.ProfesorNoEncontradoException;
+
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.ProfesorDao;
@@ -50,10 +52,20 @@ public class MateriaService {
         return materiaExistente; 
     }
 
-    public Materia modificarMateria(MateriaDto materiadto) throws MateriaNoEncontradaException {
-        Materia materia = new Materia(materiadto);
-        materiaDao.modificarMateria(materia);
 
+    public Materia modificarMateria(long idmateria,MateriaDto materiadto) throws MateriaNoEncontradaException {
+        
+        Materia materiaExistente = materiaDao.BuscarId(idmateria);
+        if (materiaExistente == null) {
+            throw new MateriaNoEncontradaException("La materia con el ID " + idmateria + " no fue encontrada.");
+        }
+        Materia materia = new Materia(materiadto);
+        
+
+        
+        materia.setIdmateria(idmateria);
+    
+       materiaDao.modificarMateria(materia);
         return materia;
     }
  

@@ -131,11 +131,12 @@ public class MateriaControllerTest {
     public void testModificarMateriaSuccess() throws MateriaNoEncontradaException {
 
         MateriaDto materiaDto = getMateriaDto();
-        when(materiaService.modificarMateria(materiaDto)).thenReturn(new Materia());
+        Materia materia = getMateria();
+        when(materiaService.modificarMateria(materia.getIdmateria(),materiaDto)).thenReturn(new Materia());
 
         ResponseEntity<Materia> modificado = materiaController.modificarMateria(1234,materiaDto);
 
-        verify(materiaService, times(1)).modificarMateria(materiaDto);
+        verify(materiaService, times(1)).modificarMateria(materia.getIdmateria(),materiaDto);
         verify(materiaValidator, times(1)).validarMateria(materiaDto);
 
         assertEquals(200, modificado.getStatusCodeValue());
@@ -145,12 +146,13 @@ public class MateriaControllerTest {
     @Test
     public void testModificarMateriaFail() throws MateriaNoEncontradaException {
         MateriaDto materiaDto = getMateriaDto();
+        Materia materia = getMateria();
 
-        doThrow(new MateriaNoEncontradaException("No se encontro materia para modificar")).when(materiaService).modificarMateria(materiaDto);
+        doThrow(new MateriaNoEncontradaException("No se encontro materia para modificar")).when(materiaService).modificarMateria(materia.getIdmateria(),materiaDto);
 
         assertThrows(MateriaNoEncontradaException.class, () -> materiaController.modificarMateria(1234, materiaDto));
 
-        verify(materiaService, times(1)).modificarMateria(materiaDto);
+        verify(materiaService, times(1)).modificarMateria(materia.getIdmateria(),materiaDto);
         verify(materiaValidator, times(1)).validarMateria(materiaDto);
     }
 
