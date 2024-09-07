@@ -16,3 +16,6 @@ Este proyecto es una implementación de un conjunto de APIs REST desarrolladas e
   - Presentation (Controllers(Handlers), Dtos y Validators ), Service, Persistence (DAOs y database) y Models.
 - **Testeos**:
   - Presentation(Controllers y Validator) y Service. 
+
+## Documentacion de Postman:
+**https://documenter.getpostman.com/view/24364633/2sAXjRW9bV**
