@@ -5,7 +5,7 @@ Este proyecto es una implementación de un conjunto de APIs REST desarrolladas e
 - **Modelo de Entidades**: 
   - Alumno, Profesor, Materia, Asignatura, Carrera.
 - **Servicios REST**:
-  - Endpoints para la gestión de alumnos, profesores, materias, y carreras.
+  - Endpoints para la gestión de alumnos, profesores, materias, asignaturas, y carreras.
 - **Validaciones**:
   - Validaciones para la correcta gestión de datos.
 - **Persistencia de datos**:
